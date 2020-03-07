@@ -1,0 +1,70 @@
+# プロジェクト名
+name: XcodeGenSample
+
+options:
+  bundleIdPrefix: com.lcr.XcodeGenSample
+  deploymentTarget:
+    iOS: 13.0
+  xcodeVersion: 11.2.1
+  # carthageを使用する場合の設定
+  #findCarthageFrameworks: true
+  #carthageExecutablePath: mint run Carthage/Carthage carthage
+
+settings:
+  base:
+      SWIFT_VERSION: 5.0
+      PRODUCT_NAME: $TARGET_NAME
+      CURRENT_PROJECT_VERSION: 1
+
+targets:
+  XcodeGenSample:
+    type: application
+    platform: iOS
+    language: Japanese
+    scheme:
+      testTargets:
+        - XcodeGenSample
+    sources:
+      - XcodeGenSample
+  XcodeGenSampleTests:
+    type: bundle.unit-test
+    platform: iOS
+    language: Japanese
+    sources:
+      - XcodeGenSampleTests
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.lcr.XcodeGenSample.test
+      INFOPLIST_FILE: XcodeGenSampleTests/Info.plist
+    dependencies:
+      - target: XcodeGenSample
+
+schemes:
+  XcodeGenSample:
+    build:
+      targets:
+        XcodeGenSample: all
+    run:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
+
+  XcodeGenSampleTests:
+    build:
+      targets:
+        XcodeGenSample: all
+        XcodeGenSampleTests: testing
+    settings:
+    test:
+      config: Debug
+      gatherCoverageData: true
+      coverageTargets:
+        - XcodeGenSample
+      targets:
+        - name: XcodeGenSampleTests
+          # テスト時のシミュレーター複数起動
+          parallelizable: false
+          randomExecutionOrder: true
