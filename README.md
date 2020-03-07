@@ -10,7 +10,7 @@ mint install yonaskolb/xcodegen
 
 ## [XcodeGen](https://github.com/yonaskolb/XcodeGen)
 
-`project.yml`を作成する
+[project.yml](project.yml)を作成する
 
 ```
 touch project.yml
